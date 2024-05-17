@@ -18,3 +18,7 @@ struct DoodleScripApp: App {
         }
     }
 }
+
+@inlinable func goHome() {
+    UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+}

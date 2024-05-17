@@ -16,6 +16,10 @@ struct ContentView: View {
     @EnvironmentObject var lines: ObservableArray<PointShape>
     @Namespace var namespace
     
+    @AppStorage("_CFG_ACTION_COPY") var actionAfterCopy: Int = 0
+    @AppStorage("_CFG_ACTION_SAVE") var actionAfterSave: Int = 0
+    //@AppStorage("_CANVAS") var
+    
     @State var generatedImage: UIImage? = nil
     //var onSetImage: (() -> Void)?
     @State private var selectedColor: Color = .accentColor
@@ -58,39 +62,38 @@ struct ContentView: View {
         }//.aspectRatio(1, contentMode: .fit)
     }
     
+    func checkName(_ checked: Bool) -> String {
+        checked ? "checkmark.circle.fill" : "circle.dotted"
+    }
+    
     @ViewBuilder var configMenus: some View {
         Menu {
             Button("About") {}
             Menu("After coping") {
-                Button {
-                    //
+                Button { actionAfterCopy = 0
                 } label: {
-                    Label("Do nothing", systemImage: "checkmark.circle.fill")
+                    Label("Do nothing", systemImage: checkName(actionAfterCopy == 0))
                 }
-                Button {
-                    //
+                Button { actionAfterCopy = 1
                 } label: {
-                    Label("Go home", systemImage: "circle.dotted")
+                    Label("Go home", systemImage: checkName(actionAfterCopy == 1))
                 }
             }
             Menu("After saving image") {
-                Button {
-                    //
+                Button { actionAfterSave = 0
                 } label: {
-                    Label("Do nothing", systemImage: "checkmark.circle.fill")
+                    Label("Do nothing", systemImage: checkName(actionAfterSave == 0))
                 }
-                Button {
-                    //
+                Button { actionAfterSave = 1
                 } label: {
-                    Label("Go to Photos", systemImage: "circle.dotted")
+                    Label("Go to Photos", systemImage: checkName(actionAfterSave == 1))
                 }
-                Button {
-                    //
+                Button { actionAfterSave = 2
                 } label: {
-                    Label("Go home", systemImage: "circle.dotted")
+                    Label("Go home", systemImage: checkName(actionAfterSave == 2))
                 }
             }
-            Button("Home") {}
+            Button("Home") { goHome() }
         } label: {
             ZStack {
                 Capsule().fill(Color.gray)

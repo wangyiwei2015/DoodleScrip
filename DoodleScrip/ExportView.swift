@@ -12,6 +12,9 @@ struct ExportView: View {
     @Binding var isPresented: Bool
     var image: UIImage?
     
+    @AppStorage("_CFG_ACTION_COPY") var actionAfterCopy: Int = 0
+    @AppStorage("_CFG_ACTION_SAVE") var actionAfterSave: Int = 0
+    
     func dismiss() {
         withAnimation { isPresented = false }
     }
@@ -35,7 +38,12 @@ struct ExportView: View {
                     Button {
                         UIPasteboard.general.image = image
                         dismiss()
-                        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                        switch actionAfterCopy {
+                        case 1:
+                            goHome()
+                        default:
+                            break
+                        }
                     } label: {
                         Label("Copy", systemImage: "swift").bold()
                     }.buttonStyle(BorderedProminentButtonStyle())
@@ -43,7 +51,14 @@ struct ExportView: View {
                     Button {
                         UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
                         dismiss()
-                        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                        switch actionAfterCopy {
+                        case 1:
+                            UIApplication.shared.open(URL(string: "photos-redirect:")!, options: [:])
+                        case 2:
+                            goHome()
+                        default:
+                            break
+                        }
                     } label: {
                         Label("Save", systemImage: "swift").bold()
                     }.buttonStyle(BorderedProminentButtonStyle())
