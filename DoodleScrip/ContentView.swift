@@ -26,17 +26,17 @@ struct ContentView: View {
         HStack(spacing: 15) {
             Spacer()
             ColorPicker("Stroke", selection: $selectedColor).labelsHidden().padding(.trailing)
-            Button { selectedWidth = 10 }
+            Button { selectedWidth = 5 }
             label: { Image(systemName: "scribble").foregroundColor(.primary) }
                 .buttonStyle(StrokeWidthBtnStyle(weight: .light))
                 .frame(width: 60, height: 30)
                 .background(Capsule().fill(Color(selectedWidth == 10 ? UIColor.systemGray3 : UIColor.systemGray5)))
-            Button { selectedWidth = 20 }
+            Button { selectedWidth = 15 }
             label: { Image(systemName: "scribble").foregroundColor(.primary) }
                 .buttonStyle(StrokeWidthBtnStyle(weight: .semibold))
                 .frame(width: 60, height: 30)
                 .background(Capsule().fill(Color(selectedWidth == 20 ? UIColor.systemGray3 : UIColor.systemGray5)))
-            Button { selectedWidth = 30 }
+            Button { selectedWidth = 25 }
             label: { Image(systemName: "scribble").foregroundColor(.primary) }
                 .buttonStyle(StrokeWidthBtnStyle(weight: .black))
                 .frame(width: 60, height: 30)
@@ -58,6 +58,49 @@ struct ContentView: View {
         }//.aspectRatio(1, contentMode: .fit)
     }
     
+    @ViewBuilder var configMenus: some View {
+        Menu {
+            Button("About") {}
+            Menu("After coping") {
+                Button {
+                    //
+                } label: {
+                    Label("Do nothing", systemImage: "checkmark.circle.fill")
+                }
+                Button {
+                    //
+                } label: {
+                    Label("Go home", systemImage: "circle.dotted")
+                }
+            }
+            Menu("After saving image") {
+                Button {
+                    //
+                } label: {
+                    Label("Do nothing", systemImage: "checkmark.circle.fill")
+                }
+                Button {
+                    //
+                } label: {
+                    Label("Go to Photos", systemImage: "circle.dotted")
+                }
+                Button {
+                    //
+                } label: {
+                    Label("Go home", systemImage: "circle.dotted")
+                }
+            }
+            Button("Home") {}
+        } label: {
+            ZStack {
+                Capsule().fill(Color.gray)
+                    .frame(width: 80, height: 32)
+                Image(systemName: "gear")
+                    .foregroundColor(.white)
+            }
+        }.buttonStyle(StrokeWidthBtnStyle(weight: .semibold))
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -74,6 +117,7 @@ struct ContentView: View {
                     .padding(.horizontal, 10)
                 Spacer()
                 //Text("Scrip").font(.title2)
+                configMenus
                 Spacer()
                 Button {
                     let renderer = ImageRenderer(
@@ -90,8 +134,8 @@ struct ContentView: View {
                 } label: {
                     Label("Export", systemImage: "checkmark")
                 }.buttonStyle(StrokeWidthBtnStyle(weight: .semibold))
-                    .frame(width: 128, height: 32)
-                    .background(Capsule().fill(Color.accentColor))
+                    .frame(width: 120, height: 32)
+                    .background(Capsule().fill(Color.accentColor).opacity(lines.array.isEmpty ? 0.5 : 1))
                     .foregroundColor(.white)
                     .disabled(lines.array.isEmpty)
             }.padding(.horizontal)

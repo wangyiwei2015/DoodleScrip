@@ -35,3 +35,20 @@ class PointShape: MyShape {
         super.init(color: color, lineWidth: lineWidth)
     }
 }
+
+struct TransferrableUIImage: Transferable {
+    var image: UIImage
+    init(_ image: UIImage) {self.image = image}
+    
+    static var transferRepresentation: some TransferRepresentation {
+        DataRepresentation(exportedContentType: .image) { asset in
+            asset.image.jpegData(compressionQuality: 1.0)!
+        }
+        DataRepresentation(exportedContentType: .png) { asset in
+            asset.image.pngData()!
+        }
+        DataRepresentation(exportedContentType: .jpeg) { asset in
+            asset.image.jpegData(compressionQuality: 1.0)!
+        }
+    }
+}
