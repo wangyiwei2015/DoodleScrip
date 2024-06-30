@@ -9,7 +9,9 @@ import SwiftUI
 
 @main
 struct DoodleScripApp: App {
-    var lines: ObservableArray<PointShape> = ObservableArray(array: [])
+    var lines: ObservableArray<PointShape> = ObservableArray(
+        array: []//readCGPointArray(for: "_LINES_STORE")
+    )
     
     var body: some Scene {
         WindowGroup {

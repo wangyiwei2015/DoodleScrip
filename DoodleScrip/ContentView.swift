@@ -171,6 +171,10 @@ struct ContentView: View {
                 image: generatedImage
             )
         }
+        
+        .onDisappear {
+            //saveCGPointArray(lines.array, to: "_LINES_STORE")
+        }
     }
     
     @inlinable func updateGesture(_ value: DragGesture.Value) {

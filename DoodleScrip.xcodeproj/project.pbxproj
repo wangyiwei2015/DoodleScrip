@@ -13,6 +13,7 @@
 		B33000DC2BF47B9400B75B65 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B33000DB2BF47B9400B75B65 /* Preview Assets.xcassets */; };
 		B33000E32BF47C6800B75B65 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33000E22BF47C6800B75B65 /* Model.swift */; };
 		B33000E52BF480E900B75B65 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33000E42BF480E900B75B65 /* ExportView.swift */; };
+		B3F6C45A2C319959008CB576 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B3F6C4592C319959008CB576 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		B33000E22BF47C6800B75B65 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B33000E42BF480E900B75B65 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		B33000E62BF495DD00B75B65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B3F6C4592C319959008CB576 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				B33000D72BF47B9400B75B65 /* Assets.xcassets */,
 				B33000D92BF47B9400B75B65 /* DoodleScrip.entitlements */,
 				B33000DA2BF47B9400B75B65 /* Preview Content */,
+				B3F6C4592C319959008CB576 /* Localizable.xcstrings */,
 			);
 			path = DoodleScrip;
 			sourceTree = "<group>";
@@ -119,6 +122,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = B33000C72BF47B9300B75B65;
 			productRefGroup = B33000D12BF47B9300B75B65 /* Products */;
@@ -137,6 +141,7 @@
 			files = (
 				B33000DC2BF47B9400B75B65 /* Preview Assets.xcassets in Resources */,
 				B33000D82BF47B9400B75B65 /* Assets.xcassets in Resources */,
+				B3F6C45A2C319959008CB576 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

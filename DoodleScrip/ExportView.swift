@@ -32,7 +32,7 @@ struct ExportView: View {
                     Label("Draggable", systemImage: "arrow.up").bold().foregroundColor(.white)
                     
                     ShareLink(item: tmpURL, subject: Text("Subject"), message: Text("message")) {
-                        Label("Share", systemImage: "swift").bold()
+                        Label("Share", systemImage: "square.and.arrow.up").bold()
                     }.buttonStyle(BorderedProminentButtonStyle())
                     
                     Button {
@@ -45,7 +45,7 @@ struct ExportView: View {
                             break
                         }
                     } label: {
-                        Label("Copy", systemImage: "swift").bold()
+                        Label("Copy", systemImage: "doc.on.doc").bold()
                     }.buttonStyle(BorderedProminentButtonStyle())
                     
                     Button {
@@ -60,7 +60,7 @@ struct ExportView: View {
                             break
                         }
                     } label: {
-                        Label("Save", systemImage: "swift").bold()
+                        Label("Save", systemImage: "tray.and.arrow.down").bold()
                     }.buttonStyle(BorderedProminentButtonStyle())
                     
                     Button {
