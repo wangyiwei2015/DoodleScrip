@@ -53,10 +53,16 @@
     },
     "Draggable" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to crop; Draggable"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "可以直接拖动"
+            "value" : "点击以裁剪；长按可拖动"
           }
         }
       }

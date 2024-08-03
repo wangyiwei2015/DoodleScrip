@@ -11,12 +11,15 @@ struct ExportView: View {
     @Namespace var namespace
     @Binding var isPresented: Bool
     var image: UIImage?
+    @State var cropping = false
+    @State var croppedImg: UIImage? = nil
     
     @AppStorage("_CFG_ACTION_COPY") var actionAfterCopy: Int = 0
     @AppStorage("_CFG_ACTION_SAVE") var actionAfterSave: Int = 0
     
     func dismiss() {
         withAnimation { isPresented = false }
+        croppedImg = nil
     }
     
     var body: some View {
@@ -45,7 +48,7 @@ struct ExportView: View {
                             break
                         }
                     } label: {
-                        Label("Copy", systemImage: "doc.on.doc").bold()
+                        Label("Copy", systemImage: "doc.on.docmi").bold()
                     }.buttonStyle(BorderedProminentButtonStyle())
                     
                     Button {
@@ -71,7 +74,7 @@ struct ExportView: View {
                 }.tint(.gray).transition(.move(edge: .bottom))
             }
             VStack {
-                Image(uiImage: image ?? UIImage()).resizable().scaledToFit()
+                Image(uiImage: croppedImg ?? image ?? UIImage()).resizable().scaledToFit()
                     //.matchedGeometryEffect(id: "doodle", in: namespace, properties: .frame)
                     .background(Color.white.shadow(color: .black.opacity(0.5), radius: 4, y: 2))
                     .draggable(TransferrableUIImage(image!))
@@ -79,9 +82,17 @@ struct ExportView: View {
                     .padding(.top, isPresented ? 32+30 : 32+10)
                     .padding(.horizontal, 22)
                     .padding(.bottom, isPresented ? 280 : 0)
+                    .onTapGesture {
+                        cropping = true
+                    }
                     .opacity(isPresented ? 1 : 0)
                 Spacer()
             }
+            CropperView(
+                inputImage: image ?? UIImage(),
+                croppedImage: $croppedImg,
+                isPresented: $cropping
+            ).opacity(cropping ? 1 : 0)
         }
     }
 }
