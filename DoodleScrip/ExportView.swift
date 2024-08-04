@@ -39,7 +39,7 @@ struct ExportView: View {
                     }.buttonStyle(BorderedProminentButtonStyle())
                     
                     Button {
-                        UIPasteboard.general.image = image
+                        UIPasteboard.general.image = croppedImg ?? image
                         dismiss()
                         switch actionAfterCopy {
                         case 1:
@@ -48,11 +48,11 @@ struct ExportView: View {
                             break
                         }
                     } label: {
-                        Label("Copy", systemImage: "doc.on.docmi").bold()
+                        Label("Copy", systemImage: "doc.on.doc").bold()
                     }.buttonStyle(BorderedProminentButtonStyle())
                     
                     Button {
-                        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+                        UIImageWriteToSavedPhotosAlbum(croppedImg ?? image!, nil, nil, nil)
                         dismiss()
                         switch actionAfterCopy {
                         case 1:
@@ -77,7 +77,7 @@ struct ExportView: View {
                 Image(uiImage: croppedImg ?? image ?? UIImage()).resizable().scaledToFit()
                     //.matchedGeometryEffect(id: "doodle", in: namespace, properties: .frame)
                     .background(Color.white.shadow(color: .black.opacity(0.5), radius: 4, y: 2))
-                    .draggable(TransferrableUIImage(image!))
+                    .draggable(TransferrableUIImage(croppedImg ?? image!))
                     .animation(.easeOut(duration: 0.3), value: isPresented)
                     .padding(.top, isPresented ? 32+30 : 32+10)
                     .padding(.horizontal, 22)

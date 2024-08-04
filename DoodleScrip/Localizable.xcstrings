@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "4:3" : {
+
+    },
+    "16:9" : {
+
+    },
     "About" : {
       "localizations" : {
         "zh-Hans" : {
@@ -40,6 +46,9 @@
           }
         }
       }
+    },
+    "Custom" : {
+
     },
     "Do nothing" : {
       "localizations" : {

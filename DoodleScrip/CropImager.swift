@@ -214,6 +214,8 @@ struct CropperView: View {
                           width: cropWidth,
                           height: cropHeight)
         croppedImage = cropImage(inputImage, toRect: rect, viewWidth: imageDisplayWidth, viewHeight: imageDisplayHeight)!
+        try? FileManager.default.removeItem(at: tmpURL)
+        try! croppedImage?.jpegData(compressionQuality: 1.0)!.write(to: tmpURL, options: .atomic)
         isPresented = false
     }
     
