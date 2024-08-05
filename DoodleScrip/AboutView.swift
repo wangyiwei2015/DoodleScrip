@@ -12,9 +12,6 @@ struct AboutView: View {
         VStack {
             Text("about")
             Text("TODO")
-            Text("About view contents")
-            Text("crop 1:1 algorithm")
-            Text("crop ui update")
         }
     }
 }
