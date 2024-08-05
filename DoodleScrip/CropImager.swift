@@ -19,9 +19,7 @@ func cropImage(
                           height:cropRect.size.height * imageViewHeightScale)
     // Perform cropping in Core Graphics
     guard let cutImageRef: CGImage = inputImage.cgImage?.cropping(to:cropZone)
-    else {
-        return nil
-    }
+    else { return nil }
     // Return image to UIImage
     let croppedImage: UIImage = UIImage(cgImage: cutImageRef)
     return croppedImage
@@ -36,27 +34,18 @@ struct CropperView: View {
     @State private var screenWidth = UIScreen.main.bounds.height
     @State private var screenHeight = UIScreen.main.bounds.width
     
-    //后面可以变成自定义的部分
-    //边框颜色
     var cropBorderColor: Color? = Color.white
-    //顶点图案颜色
-    var cropVerticesColor: Color = Color.pink
-    //遮罩透明度
     var cropperOutsideOpacity: Double = 0.4
     //    //裁切框样式
     //    @State private var iconVertices: Bool = false
     
-    //@Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
-    
     @State var imageDisplayWidth: CGFloat = 0
     @State var imageDisplayHeight: CGFloat = 0
-    
     @State var cropWidth: CGFloat = UIScreen.main.bounds.height/3
     @State var cropHeight: CGFloat = UIScreen.main.bounds.height/3*0.5
     @State var cropWidthAdd: CGFloat = 0
     @State var cropHeightAdd: CGFloat = 0
-    @State var cropMode = 0
-    
+    @State var cropAspectRatioOne = false
     @State var currentPositionZS: CGSize = .zero
     @State var newPositionZS: CGSize = .zero
     @State var currentPositionZ: CGSize = .zero
@@ -78,15 +67,15 @@ struct CropperView: View {
     
     var body: some View {
         ZStack {
-            //黑色背景
-            Rectangle().fill(.black).ignoresSafeArea()
+            Rectangle().fill(.black).opacity(0.5)
+                .ignoresSafeArea()
             
             VStack {
                 ZStack {
                     Image(uiImage: inputImage)
                         .resizable().scaledToFit()
                         .overlay(GeometryReader{ geo -> AnyView in
-                            DispatchQueue.main.async{
+                            DispatchQueue.main.async {
                                 self.imageDisplayWidth = geo.size.width
                                 self.imageDisplayHeight = geo.size.height
                             }
@@ -102,94 +91,42 @@ struct CropperView: View {
                 
                 Spacer()
                 
-                HStack {
+                ZStack {
+                    Capsule().fill(Color.black).frame(height: 60)
                     HStack {
-                        Button (action : {
-                            cropMode = 0
-                        }) {
-                            if cropMode == 0 {
-                                Text("Custom")
-                                    .padding(.all, 10)
-                                    .foregroundColor(.white)
-                                    .background(.gray)
-                                
-                            } else {
-                                Text("Custom")
-                                    .foregroundColor(.white)
-                                    .padding(.all, 10)
-                            }
-                        }
+                        HStack {
+                            Toggle("1:1", isOn: $cropAspectRatioOne)
+                                .tint(.yellow)
+                                .onChange(of: cropAspectRatioOne) { is1by1 in
+                                    if is1by1 {
+                                        cropHeight = min(cropHeight, cropWidth)
+                                        cropWidth = min(cropHeight, cropWidth)
+                                        if currentPositionCrop.width >= imageDisplayWidth/2 - cropWidth/2{
+                                            currentPositionCrop.width = imageDisplayWidth/2 - cropWidth/2
+                                            operateOnEnd()
+                                        } else if currentPositionCrop.width <= -imageDisplayWidth/2 + cropWidth/2{
+                                            currentPositionCrop.width = -imageDisplayWidth/2 + cropWidth/2
+                                            operateOnEnd()
+                                        }
+                                    }
+                                }
+                        }.frame(width: 90)
+                            .foregroundColor(.yellow)
+                            .padding()
                         
-                        Button (action : {
-                            cropMode = 1
-                            cropHeight = cropWidth*9/16
-                            if cropWidth > cropHeight{
-                                cropWidth = cropHeight*16/9
-                            }else{
-                                cropHeight = cropWidth*9/16
-                            }
-                            
-                            if currentPositionCrop.width >= imageDisplayWidth/2 - cropWidth/2{
-                                currentPositionCrop.width = imageDisplayWidth/2 - cropWidth/2
-                                operateOnEnd()
-                            }else if currentPositionCrop.width <= -imageDisplayWidth/2 + cropWidth/2{
-                                currentPositionCrop.width = -imageDisplayWidth/2 + cropWidth/2
-                                operateOnEnd()
-                            }
-                        }) {
-                            if cropMode == 1 {
-                                Text("16:9")
-                                    .padding(.all, 10)
-                                    .foregroundColor(.white)
-                                    .background(.gray)
-                            } else {
-                                Text("16:9")
-                                    .padding(.all, 10)
-                                    .foregroundColor(.white)
-                            }
-                        }
+                        Spacer()
                         
-                        Button (action : {
-                            cropMode = 2
-                            if cropWidth > cropHeight{
-                                cropWidth = cropHeight*4/3
-                            }else{
-                                cropHeight = cropWidth*3/4
-                            }
-                            
-                            if currentPositionCrop.width >= imageDisplayWidth/2 - cropWidth/2{
-                                currentPositionCrop.width = imageDisplayWidth/2 - cropWidth/2
-                                operateOnEnd()
-                            }else if currentPositionCrop.width <= -imageDisplayWidth/2 + cropWidth/2{
-                                currentPositionCrop.width = -imageDisplayWidth/2 + cropWidth/2
-                                operateOnEnd()
-                            }
-                        }) {
-                            if cropMode == 2 {
-                                Text("4:3")
-                                    .padding(.all, 10)
-                                    .foregroundColor(.white)
-                                    .background(.gray)
-                            } else {
-                                Text("4:3")
-                                    .padding(.all, 10)
-                                    .foregroundColor(.white)
-                            }
-                        }
+                        Button(action: crop, label: {
+                            Image(systemName: "crop")
+                                .padding(10)
+                                .foregroundColor(.yellow)
+                                .background(
+                                    Circle().fill(Color.gray).opacity(0.2)
+                                )
+                        })
+                        .padding()
                     }
-                    .background(Color.gray.opacity(0.2))
-                    .padding()
-                    
-                    Spacer()
-                    
-                    Button(action: crop, label: {
-                        Image(systemName: "crop")
-                            .padding(.all, 10)
-                            .foregroundColor(.white)
-                            .background(Color.gray.opacity(0.2))
-                    })
-                    .padding()
-                }
+                }.padding(.horizontal)
             }
         }
         .navigationBarHidden(true)
@@ -216,7 +153,9 @@ struct CropperView: View {
         croppedImage = cropImage(inputImage, toRect: rect, viewWidth: imageDisplayWidth, viewHeight: imageDisplayHeight)!
         try? FileManager.default.removeItem(at: tmpURL)
         try! croppedImage?.jpegData(compressionQuality: 1.0)!.write(to: tmpURL, options: .atomic)
-        isPresented = false
+        withAnimation(.linear(duration: 0.2)) {
+            isPresented = false
+        }
     }
     
     func operateOnEnd() {
@@ -224,33 +163,24 @@ struct CropperView: View {
         cropHeight = cropHeight + cropHeightAdd
         cropWidthAdd = 0
         cropHeightAdd = 0
-        
         //Conners
         currentPositionZS.width = currentPositionCrop.width
         currentPositionZS.height = currentPositionCrop.height
-        
         currentPositionZX.width = currentPositionCrop.width
         currentPositionZX.height = currentPositionCrop.height
-        
         currentPositionYX.width = currentPositionCrop.width
         currentPositionYX.height = currentPositionCrop.height
-        
         currentPositionYS.width = currentPositionCrop.width
         currentPositionYS.height = currentPositionCrop.height
-        
         //Sides
         currentPositionS.width = currentPositionCrop.width
         currentPositionS.height = currentPositionCrop.height
-        
         currentPositionZ.width = currentPositionCrop.width
         currentPositionZ.height = currentPositionCrop.height
-        
         currentPositionX.width = currentPositionCrop.width
         currentPositionX.height = currentPositionCrop.height
-        
         currentPositionY.width = currentPositionCrop.width
         currentPositionY.height = currentPositionCrop.height
-        
         self.newPositionCrop = self.currentPositionCrop
         self.newPositionZS = self.currentPositionZS
         self.newPositionZX = self.currentPositionZX

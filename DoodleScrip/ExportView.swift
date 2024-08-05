@@ -18,8 +18,10 @@ struct ExportView: View {
     @AppStorage("_CFG_ACTION_SAVE") var actionAfterSave: Int = 0
     
     func dismiss() {
-        withAnimation { isPresented = false }
-        croppedImg = nil
+        withAnimation {
+            isPresented = false
+            croppedImg = nil
+        }
     }
     
     var body: some View {
@@ -83,7 +85,9 @@ struct ExportView: View {
                     .padding(.horizontal, 22)
                     .padding(.bottom, isPresented ? 280 : 0)
                     .onTapGesture {
-                        cropping = true
+                        withAnimation(.linear(duration: 0.2)) {
+                            cropping = true
+                        }
                     }
                     .opacity(isPresented ? 1 : 0)
                 Spacer()

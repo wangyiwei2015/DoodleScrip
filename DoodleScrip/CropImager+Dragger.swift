@@ -89,8 +89,7 @@ extension CropperView {
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        var modeRatio:CGFloat = 1
-                        if cropMode == 0{
+                        if !cropAspectRatioOne {
                             //现在的高度大于40并且不超过上边界
                             if cropHeight-value.translation.height > 40 && value.translation.height + newPositionCrop.height >= -imageDisplayHeight/2+cropHeight/2{
                                 //自由模式
@@ -105,41 +104,34 @@ extension CropperView {
                                 currentPositionCrop.height = value.translation.height/2 + newPositionCrop.height
                                 cropHeightAdd = -value.translation.height
                             }
-                        }else{
-                            if cropMode == 1{
-                                //16:9
-                                modeRatio = 16/9
-                            }else if cropMode == 2{
-                                //4:3
-                                modeRatio = 4/3
-                            }
+                        } else {
                             //现在的高度和宽度都大于40
-                            if (cropHeight-value.translation.height > 40 || cropWidth-value.translation.height*modeRatio > 40) &&
+                            if (cropHeight-value.translation.height > 40 || cropWidth-value.translation.height > 40) &&
                                 //防止上边超过
                                 value.translation.height + newPositionS.height >= -imageDisplayHeight/2+cropHeight/2 &&
                                 //防止下边超过
                                 value.translation.height + newPositionS.height <= imageDisplayHeight/2-cropHeight/2 &&
                                 //防止右边超过
-                                currentPositionCrop.width+(cropWidth-value.translation.height*modeRatio)/2 <= imageDisplayWidth/2 &&
+                                currentPositionCrop.width+(cropWidth-value.translation.height)/2 <= imageDisplayWidth/2 &&
                                 //防止左边超过
-                                currentPositionCrop.width-(cropWidth-value.translation.height*modeRatio)/2 >= -imageDisplayWidth/2 {
+                                currentPositionCrop.width-(cropWidth-value.translation.height)/2 >= -imageDisplayWidth/2 {
                                 currentPositionS.height = value.translation.height + newPositionS.height
                                 //相邻的角
-                                currentPositionZS.width = value.translation.height*modeRatio/2 + newPositionZS.width
+                                currentPositionZS.width = value.translation.height/2 + newPositionZS.width
                                 currentPositionZS.height = value.translation.height + newPositionZS.height
-                                currentPositionYS.width = -value.translation.height*modeRatio/2 + newPositionYS.width
+                                currentPositionYS.width = -value.translation.height/2 + newPositionYS.width
                                 currentPositionYS.height = value.translation.height + newPositionYS.height
                                 //不相邻的角
-                                currentPositionZX.width = value.translation.height*modeRatio/2 + newPositionZX.width
-                                currentPositionYX.width = -value.translation.height*modeRatio/2 + newPositionYX.width
+                                currentPositionZX.width = value.translation.height/2 + newPositionZX.width
+                                currentPositionYX.width = -value.translation.height/2 + newPositionYX.width
                                 //相邻的边
-                                currentPositionY.width = -value.translation.height*modeRatio/2 + newPositionY.width
+                                currentPositionY.width = -value.translation.height/2 + newPositionY.width
                                 currentPositionY.height = value.translation.height/2 + newPositionY.height
-                                currentPositionZ.width = value.translation.height*modeRatio/2 + newPositionZ.width
+                                currentPositionZ.width = value.translation.height/2 + newPositionZ.width
                                 currentPositionZ.height = value.translation.height/2 + newPositionZ.height
                                 //裁剪器部分
                                 currentPositionCrop.height = value.translation.height/2 + newPositionCrop.height
-                                cropWidthAdd = -value.translation.height*modeRatio
+                                cropWidthAdd = -value.translation.height
                                 cropHeightAdd = -value.translation.height
                             }
                         }
@@ -160,8 +152,7 @@ extension CropperView {
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        var modeRatio:CGFloat = 1
-                        if cropMode == 0{
+                        if !cropAspectRatioOne {
                             //现在的高度大于40并且不超过下边界
                             if cropHeight+value.translation.height > 40 && value.translation.height + newPositionCrop.height <= imageDisplayHeight/2-cropHeight/2{
                                 //自由模式
@@ -176,42 +167,35 @@ extension CropperView {
                                 currentPositionCrop.height = value.translation.height/2 + newPositionCrop.height
                                 cropHeightAdd = value.translation.height
                             }
-                        }else{
-                            if cropMode == 1{
-                                //16:9
-                                modeRatio = 16/9
-                            }else if cropMode == 2{
-                                //4:3
-                                modeRatio = 4/3
-                            }
-                            if (cropHeight+value.translation.height > 40 || cropWidth+value.translation.height*modeRatio > 40) &&
+                        } else {
+                            if (cropHeight+value.translation.height > 40 || cropWidth+value.translation.height > 40) &&
                                 //防止上边超过
                                 value.translation.height + newPositionX.height >= -imageDisplayHeight/2+cropHeight/2 &&
                                 //防止下边超过
                                 value.translation.height + newPositionX.height <= imageDisplayHeight/2-cropHeight/2 &&
                                 //防止右边超过
-                                currentPositionCrop.width+(cropWidth+value.translation.height*modeRatio)/2 <= imageDisplayWidth/2 &&
+                                currentPositionCrop.width+(cropWidth+value.translation.height)/2 <= imageDisplayWidth/2 &&
                                 //防止左边超过
-                                currentPositionCrop.width-(cropWidth+value.translation.height*modeRatio)/2 >= -imageDisplayWidth/2 {
+                                currentPositionCrop.width-(cropWidth+value.translation.height)/2 >= -imageDisplayWidth/2 {
                                 
                                 //自由模式
                                 currentPositionX.height = value.translation.height + newPositionX.height
                                 //相邻的角
-                                currentPositionZX.width = -value.translation.height*modeRatio/2 + newPositionZX.width
+                                currentPositionZX.width = -value.translation.height/2 + newPositionZX.width
                                 currentPositionZX.height = value.translation.height + newPositionZX.height
-                                currentPositionYX.width = value.translation.height*modeRatio/2 + newPositionYX.width
+                                currentPositionYX.width = value.translation.height/2 + newPositionYX.width
                                 currentPositionYX.height = value.translation.height + newPositionYX.height
                                 //不相邻的角
-                                currentPositionZS.width = -value.translation.height*modeRatio/2 + newPositionZS.width
-                                currentPositionYS.width = value.translation.height*modeRatio/2 + newPositionYS.width
+                                currentPositionZS.width = -value.translation.height/2 + newPositionZS.width
+                                currentPositionYS.width = value.translation.height/2 + newPositionYS.width
                                 //相邻的边
-                                currentPositionY.width = value.translation.height*modeRatio/2 + newPositionY.width
+                                currentPositionY.width = value.translation.height/2 + newPositionY.width
                                 currentPositionY.height = value.translation.height/2 + newPositionY.height
-                                currentPositionZ.width = -value.translation.height*modeRatio/2 + newPositionZ.width
+                                currentPositionZ.width = -value.translation.height/2 + newPositionZ.width
                                 currentPositionZ.height = value.translation.height/2 + newPositionZ.height
                                 //裁剪器部分
                                 currentPositionCrop.height = value.translation.height/2 + newPositionCrop.height
-                                cropWidthAdd = value.translation.height*modeRatio
+                                cropWidthAdd = value.translation.height
                                 cropHeightAdd = value.translation.height
                             }
                         }
@@ -232,8 +216,7 @@ extension CropperView {
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        var modeRatio:CGFloat = 1.00
-                        if cropMode == 0{
+                        if !cropAspectRatioOne {
                             if cropWidth+value.translation.width > 40 && value.translation.width + newPositionCrop.width <= imageDisplayWidth/2-cropWidth/2{
                                 //自由模式
                                 currentPositionY.width = value.translation.width + newPositionY.width
@@ -249,19 +232,12 @@ extension CropperView {
                                 currentPositionCrop.width = value.translation.width/2 + newPositionCrop.width
                                 cropWidthAdd = value.translation.width
                             }
-                        }else{
-                            if cropMode == 1{
-                                //16:9
-                                modeRatio = 16/9
-                            }else if cropMode == 2{
-                                //4:3
-                                modeRatio = 4/3
-                            }
-                            if (cropHeight+value.translation.width/modeRatio > 40 || cropWidth+value.translation.width > 40) &&
+                        } else {
+                            if (cropHeight+value.translation.width > 40 || cropWidth+value.translation.width > 40) &&
                                 //防止上边超过————这里要注意有负号
-                                -value.translation.width/modeRatio/2 + newPositionY.height >= -imageDisplayHeight/2+cropHeight/2 &&
+                                -value.translation.width/2 + newPositionY.height >= -imageDisplayHeight/2+cropHeight/2 &&
                                 //防止下边超过
-                                value.translation.width/modeRatio/2 + newPositionY.height <= imageDisplayHeight/2-cropHeight/2 &&
+                                value.translation.width/2 + newPositionY.height <= imageDisplayHeight/2-cropHeight/2 &&
                                 //防止右边超过
                                 currentPositionCrop.width+(cropWidth-value.translation.width)/2 <= imageDisplayWidth/2 &&
                                 //防止左边超过
@@ -269,22 +245,22 @@ extension CropperView {
                                 currentPositionY.width = value.translation.width + newPositionY.width
                                 //相邻的角
                                 currentPositionYS.width = value.translation.width + newPositionYS.width
-                                currentPositionYS.height = -value.translation.width/modeRatio/2 + newPositionYS.height
+                                currentPositionYS.height = -value.translation.width/2 + newPositionYS.height
                                 
                                 currentPositionYX.width = value.translation.width + newPositionYX.width
-                                currentPositionYX.height = value.translation.width/modeRatio/2 + newPositionYX.height
+                                currentPositionYX.height = value.translation.width/2 + newPositionYX.height
                                 //不相邻的角
-                                currentPositionZS.height = -value.translation.width/modeRatio/2 + newPositionZS.height
-                                currentPositionZX.height = value.translation.width/modeRatio/2 + newPositionZX.height
+                                currentPositionZS.height = -value.translation.width/2 + newPositionZS.height
+                                currentPositionZX.height = value.translation.width/2 + newPositionZX.height
                                 //相邻的边
                                 currentPositionS.width = value.translation.width/2 + newPositionS.width
-                                currentPositionS.height = -value.translation.width/modeRatio/2 + newPositionS.height
+                                currentPositionS.height = -value.translation.width/2 + newPositionS.height
                                 currentPositionX.width = value.translation.width/2 + newPositionX.width
-                                currentPositionX.height = value.translation.width/modeRatio/2 + newPositionX.height
+                                currentPositionX.height = value.translation.width/2 + newPositionX.height
                                 //裁剪器部分
                                 currentPositionCrop.width = value.translation.width/2 + newPositionCrop.width
                                 cropWidthAdd = value.translation.width
-                                cropHeightAdd = value.translation.width/modeRatio
+                                cropHeightAdd = value.translation.width
                             }
                         }
                     }
@@ -304,8 +280,7 @@ extension CropperView {
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        var modeRatio:CGFloat = 1.00
-                        if cropMode == 0{
+                        if !cropAspectRatioOne {
                             //现在的宽度大于40并且不超过左边界
                             if cropWidth-value.translation.width > 40 && value.translation.width + newPositionCrop.width >= -imageDisplayWidth/2+cropWidth/2{
                                 //自由模式
@@ -323,19 +298,12 @@ extension CropperView {
                                 cropWidthAdd = -value.translation.width
                             }
                             
-                        }else{
-                            if cropMode == 1{
-                                //16:9
-                                modeRatio = 16/9
-                            }else if cropMode == 2{
-                                //4:3
-                                modeRatio = 4/3
-                            }
-                            if (cropHeight-value.translation.width/modeRatio > 40 || cropWidth-value.translation.width > 40) &&
+                        } else {
+                            if (cropHeight-value.translation.width > 40 || cropWidth-value.translation.width > 40) &&
                                 //防止上边超过
-                                value.translation.width/modeRatio/2 + newPositionZ.height >= -imageDisplayHeight/2+cropHeight/2 &&
+                                value.translation.width/2 + newPositionZ.height >= -imageDisplayHeight/2+cropHeight/2 &&
                                 //防止下边超过————这里要注意有负号
-                                -value.translation.width/modeRatio/2 + newPositionZ.height <= imageDisplayHeight/2-cropHeight/2 &&
+                                -value.translation.width/2 + newPositionZ.height <= imageDisplayHeight/2-cropHeight/2 &&
                                 //防止右边超过
                                 currentPositionCrop.width+(cropWidth-value.translation.width)/2 <= imageDisplayWidth/2 &&
                                 //防止左边超过
@@ -343,21 +311,21 @@ extension CropperView {
                                 currentPositionZ.width = value.translation.width + newPositionZ.width
                                 //相邻的角
                                 currentPositionZS.width = value.translation.width + newPositionZS.width
-                                currentPositionZS.height = value.translation.width/modeRatio/2 + newPositionZS.height
+                                currentPositionZS.height = value.translation.width/2 + newPositionZS.height
                                 currentPositionZX.width = value.translation.width + newPositionZX.width
-                                currentPositionZX.height = -value.translation.width/modeRatio/2 + newPositionZX.height
+                                currentPositionZX.height = -value.translation.width/2 + newPositionZX.height
                                 //不相邻的角
-                                currentPositionYS.height = value.translation.width/modeRatio/2 + newPositionYS.height
-                                currentPositionYX.height = -value.translation.width/modeRatio/2 + newPositionYX.height
+                                currentPositionYS.height = value.translation.width/2 + newPositionYS.height
+                                currentPositionYX.height = -value.translation.width/2 + newPositionYX.height
                                 //相邻的边
                                 currentPositionS.width = value.translation.width/2 + newPositionS.width
-                                currentPositionS.height = value.translation.width/modeRatio/2 + newPositionS.height
+                                currentPositionS.height = value.translation.width/2 + newPositionS.height
                                 currentPositionX.width = value.translation.width/2 + newPositionX.width
-                                currentPositionX.height = -value.translation.width/modeRatio/2 + newPositionX.height
+                                currentPositionX.height = -value.translation.width/2 + newPositionX.height
                                 //裁剪器部分
                                 currentPositionCrop.width = value.translation.width/2 + newPositionCrop.width
                                 cropWidthAdd = -value.translation.width
-                                cropHeightAdd = -value.translation.width/modeRatio
+                                cropHeightAdd = -value.translation.width
                             }
                         }
                     }
@@ -367,18 +335,19 @@ extension CropperView {
             )
     }
     
+    @ViewBuilder var handler: some View {
+        Circle().frame(width: 20, height: 20)
+            .foregroundColor(Color(UIColor.systemGray5))
+    }
+    
     @ViewBuilder var 左上把手: some View {
         //Top-Leading
-        Image(systemName: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
-            .font(.system(size: 12))
-            .foregroundColor(cropVerticesColor)
-            .background(Circle().frame(width: 20, height: 20).foregroundColor(Color.white))
+        handler
             .offset(x: currentPositionZS.width - cropWidth/2, y: currentPositionZS.height - cropHeight/2)
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        var modeRatio:CGFloat = 1
-                        if cropMode == 0{
+                        if !cropAspectRatioOne {
                             //自由模式
                             //水平方向
                             if cropWidth-value.translation.width > 40 && value.translation.width+newPositionZS.width > -imageDisplayWidth/2+cropWidth/2 {
@@ -406,38 +375,31 @@ extension CropperView {
                                 currentPositionCrop.height = value.translation.height/2 + newPositionCrop.height
                                 cropHeightAdd = -value.translation.height
                             }
-                        }else{
-                            if cropMode == 1{
-                                //16:9
-                                modeRatio = 9/16
-                            }else if cropMode == 2{
-                                //4:3
-                                modeRatio = 3/4
-                            }
-                            if (cropWidth-value.translation.width > 40 || cropHeight-value.translation.width*modeRatio > 40) &&
+                        } else {
+                            if (cropWidth-value.translation.width > 40 || cropHeight-value.translation.width > 40) &&
                                 //防止上边超过————这里要注意有负号
                                 value.translation.height + newPositionZS.height >= -imageDisplayHeight/2+cropHeight/2 &&
                                 //防止左边超过
                                 currentPositionCrop.width-(cropWidth-value.translation.width)/2 >= -imageDisplayWidth/2 {
                                 
                                 currentPositionZS.width = value.translation.width + newPositionZS.width
-                                currentPositionZS.height = value.translation.width*modeRatio + newPositionZS.height
+                                currentPositionZS.height = value.translation.width + newPositionZS.height
                                 //相邻的角
                                 currentPositionZX.width = value.translation.width + newPositionZX.width
-                                currentPositionYS.height = value.translation.width*modeRatio + newPositionYS.height
+                                currentPositionYS.height = value.translation.width + newPositionYS.height
                                 //相邻的边
                                 currentPositionS.width = value.translation.width/2 + newPositionS.width
-                                currentPositionS.height = value.translation.width*modeRatio + newPositionS.height
+                                currentPositionS.height = value.translation.width + newPositionS.height
                                 currentPositionZ.width = value.translation.width + newPositionZ.width
-                                currentPositionZ.height = value.translation.width/2*modeRatio + newPositionZ.height
+                                currentPositionZ.height = value.translation.width/2 + newPositionZ.height
                                 //不相邻的边
                                 currentPositionX.width = value.translation.width/2 + newPositionX.width
-                                currentPositionY.height = value.translation.width/2*modeRatio + newPositionY.height
+                                currentPositionY.height = value.translation.width/2 + newPositionY.height
                                 //裁剪器部分
                                 currentPositionCrop.width = value.translation.width/2 + newPositionCrop.width
-                                currentPositionCrop.height = value.translation.width/2*modeRatio + newPositionCrop.height
+                                currentPositionCrop.height = value.translation.width/2 + newPositionCrop.height
                                 cropWidthAdd = -value.translation.width
-                                cropHeightAdd = -value.translation.width*modeRatio
+                                cropHeightAdd = -value.translation.width
                             }
                         }
                     }
@@ -449,17 +411,12 @@ extension CropperView {
     
     @ViewBuilder var 左下把手: some View {
         //Bottom-Leading
-        Image(systemName: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
-            .font(.system(size: 12))
-            .foregroundColor(cropVerticesColor)
-            .background(Circle().frame(width: 20, height: 20).foregroundColor(Color.white))
+        handler
             .offset(x: currentPositionZX.width - cropWidth/2, y: currentPositionZX.height + cropHeight/2)
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        var modeRatio:CGFloat = 1
-                        
-                        if cropMode == 0{
+                        if !cropAspectRatioOne {
                             if cropWidth-value.translation.width > 40 && value.translation.width+newPositionZX.width > -imageDisplayWidth/2+cropWidth/2{
                                 currentPositionZX.width = value.translation.width + newPositionZX.width
                                 currentPositionZS.width = value.translation.width + newPositionZS.width
@@ -486,40 +443,33 @@ extension CropperView {
                                 currentPositionCrop.height = value.translation.height/2 + newPositionCrop.height
                                 cropHeightAdd = value.translation.height
                             }
-                        }else{
-                            if cropMode == 1{
-                                //16:9
-                                modeRatio = 9/16
-                            }else if cropMode == 2{
-                                //4:3
-                                modeRatio = 3/4
-                            }
-                            if (cropWidth-value.translation.width > 40 || cropHeight-value.translation.width*modeRatio > 40) &&
+                        } else {
+                            if (cropWidth-value.translation.width > 40 || cropHeight-value.translation.width > 40) &&
                                 //防止下边超过
-                                -value.translation.width*modeRatio + newPositionZX.height <= imageDisplayHeight/2-cropHeight/2 &&
+                                -value.translation.width + newPositionZX.height <= imageDisplayHeight/2-cropHeight/2 &&
                                 //防止左边超过
                                 currentPositionCrop.width-(cropWidth-value.translation.width)/2 >= -imageDisplayWidth/2 {
                                 
                                 currentPositionZX.width = value.translation.width + newPositionZX.width
-                                currentPositionZX.height = -value.translation.width*modeRatio + newPositionZX.height
+                                currentPositionZX.height = -value.translation.width + newPositionZX.height
                                 
                                 currentPositionZS.width = value.translation.width + newPositionZS.width
-                                currentPositionYX.height = -value.translation.width*modeRatio + newPositionYX.height
+                                currentPositionYX.height = -value.translation.width + newPositionYX.height
                                 //相邻的边
                                 currentPositionZ.width = value.translation.width + newPositionZ.width
-                                currentPositionZ.height = -value.translation.width/2*modeRatio + newPositionZ.height
+                                currentPositionZ.height = -value.translation.width/2 + newPositionZ.height
                                 
                                 currentPositionX.width = value.translation.width/2 + newPositionX.width
-                                currentPositionX.height = -value.translation.width*modeRatio + newPositionX.height
+                                currentPositionX.height = -value.translation.width + newPositionX.height
                                 
                                 //不相邻的边
-                                currentPositionY.height = -value.translation.width/2*modeRatio + newPositionY.height
+                                currentPositionY.height = -value.translation.width/2 + newPositionY.height
                                 currentPositionS.width = value.translation.width/2 + newPositionX.width
                                 
                                 currentPositionCrop.width = value.translation.width/2 + newPositionCrop.width
-                                currentPositionCrop.height = -value.translation.width/2*modeRatio + newPositionCrop.height
+                                currentPositionCrop.height = -value.translation.width/2 + newPositionCrop.height
                                 cropWidthAdd = -value.translation.width
-                                cropHeightAdd = -value.translation.width*modeRatio
+                                cropHeightAdd = -value.translation.width
                             }
                         }
                     }
@@ -531,17 +481,12 @@ extension CropperView {
     
     @ViewBuilder var 右上把手: some View {
         //Bottom-Topping
-        Image(systemName: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
-            .font(.system(size: 12))
-            .foregroundColor(cropVerticesColor)
-            .background(Circle().frame(width: 20, height: 20).foregroundColor(Color.white))
+        handler
             .offset(x: currentPositionYS.width + cropWidth/2, y: currentPositionYS.height - cropHeight/2)
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        var modeRatio:CGFloat = 1
-                        
-                        if cropMode == 0{
+                        if !cropAspectRatioOne {
                             if cropWidth+value.translation.width > 40 && value.translation.width+newPositionYS.width < imageDisplayWidth/2-cropWidth/2{
                                 currentPositionYS.width = value.translation.width + newPositionYS.width
                                 currentPositionYX.width = value.translation.width + newPositionYX.width
@@ -567,41 +512,34 @@ extension CropperView {
                                 currentPositionCrop.height = value.translation.height/2 + newPositionCrop.height
                                 cropHeightAdd = -value.translation.height
                             }
-                        }else{
-                            if cropMode == 1{
-                                //16:9
-                                modeRatio = 9/16
-                            }else if cropMode == 2{
-                                //4:3
-                                modeRatio = 3/4
-                            }
-                            if (cropWidth+value.translation.width > 40 || cropHeight+value.translation.width*modeRatio > 40) &&
+                        } else {
+                            if (cropWidth+value.translation.width > 40 || cropHeight+value.translation.width > 40) &&
                                 //防止上边超过
-                                -value.translation.width*modeRatio + newPositionZS.height >= -imageDisplayHeight/2+cropHeight/2 &&
+                                -value.translation.width + newPositionZS.height >= -imageDisplayHeight/2+cropHeight/2 &&
                                 //防止右边超过
                                 currentPositionCrop.width+(cropWidth+value.translation.width)/2 <= imageDisplayWidth/2 {
                                 
                                 currentPositionYS.width = value.translation.width + newPositionYS.width
-                                currentPositionYS.height = -value.translation.width*modeRatio + newPositionYS.height
+                                currentPositionYS.height = -value.translation.width + newPositionYS.height
                                 
                                 currentPositionYX.width = value.translation.width + newPositionYX.width
-                                currentPositionZS.height = -value.translation.width*modeRatio + newPositionZS.height
+                                currentPositionZS.height = -value.translation.width + newPositionZS.height
                                 
                                 //相邻的边
                                 currentPositionY.width = value.translation.width + newPositionY.width
-                                currentPositionY.height = -value.translation.width/2*modeRatio + newPositionY.height
+                                currentPositionY.height = -value.translation.width/2 + newPositionY.height
                                 
                                 currentPositionS.width = value.translation.width/2 + newPositionX.width
-                                currentPositionS.height = -value.translation.width*modeRatio + newPositionX.height
+                                currentPositionS.height = -value.translation.width + newPositionX.height
                                 
                                 //不相邻的边
                                 currentPositionX.width = value.translation.width/2 + newPositionX.width
-                                currentPositionZ.height = -value.translation.width/2*modeRatio + newPositionZ.height
+                                currentPositionZ.height = -value.translation.width/2 + newPositionZ.height
                                 
                                 currentPositionCrop.width = value.translation.width/2 + newPositionCrop.width
-                                currentPositionCrop.height = -value.translation.width/2*modeRatio + newPositionCrop.height
+                                currentPositionCrop.height = -value.translation.width/2 + newPositionCrop.height
                                 cropWidthAdd = value.translation.width
-                                cropHeightAdd = value.translation.width*modeRatio
+                                cropHeightAdd = value.translation.width
                             }
                         }
                     }
@@ -613,17 +551,12 @@ extension CropperView {
     
     @ViewBuilder var 右下把手: some View {
         //Bottom-Trailing
-        Image(systemName: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
-            .font(.system(size: 12))
-            .foregroundColor(cropVerticesColor)
-            .background(Circle().frame(width: 20, height: 20).foregroundColor(Color.white))
+        handler
             .offset(x: currentPositionYX.width + cropWidth/2, y: currentPositionYX.height + cropHeight/2)
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        var modeRatio:CGFloat = 1
-                        
-                        if cropMode == 0{
+                        if !cropAspectRatioOne {
                             if cropWidth+value.translation.width > 40 && value.translation.width+newPositionYX.width < imageDisplayWidth/2-cropWidth/2{
                                 currentPositionYX.width = value.translation.width + newPositionYX.width
                                 currentPositionYS.width = value.translation.width + newPositionYS.width
@@ -649,41 +582,34 @@ extension CropperView {
                                 currentPositionCrop.height = value.translation.height/2 + newPositionCrop.height
                                 cropHeightAdd = value.translation.height
                             }
-                        }else{
-                            if cropMode == 1{
-                                //16:9
-                                modeRatio = 9/16
-                            }else if cropMode == 2{
-                                //4:3
-                                modeRatio = 3/4
-                            }
-                            if (cropWidth+value.translation.width > 40 || cropHeight+value.translation.width*modeRatio > 40) &&
+                        } else {
+                            if (cropWidth+value.translation.width > 40 || cropHeight+value.translation.width > 40) &&
                                 //防止下边超过
-                                value.translation.width*modeRatio + newPositionYX.height <= imageDisplayHeight/2-cropHeight/2 &&
+                                value.translation.width + newPositionYX.height <= imageDisplayHeight/2-cropHeight/2 &&
                                 //防止右边超过
                                 currentPositionCrop.width+(cropWidth+value.translation.width)/2 <= imageDisplayWidth/2 {
                                 
                                 currentPositionYX.width = value.translation.width + newPositionYX.width
-                                currentPositionYX.height = value.translation.width*modeRatio + newPositionYX.height
+                                currentPositionYX.height = value.translation.width + newPositionYX.height
                                 
                                 currentPositionYS.width = value.translation.width + newPositionYS.width
-                                currentPositionZX.height = value.translation.width*modeRatio + newPositionZX.height
+                                currentPositionZX.height = value.translation.width + newPositionZX.height
                                 
                                 //相邻的边
                                 currentPositionX.width = value.translation.width/2 + newPositionX.width
-                                currentPositionX.height = value.translation.width*modeRatio + newPositionX.height
+                                currentPositionX.height = value.translation.width + newPositionX.height
                                 
                                 currentPositionY.width = value.translation.width + newPositionY.width
-                                currentPositionY.height = value.translation.width/2*modeRatio + newPositionY.height
+                                currentPositionY.height = value.translation.width/2 + newPositionY.height
                                 
                                 //不相邻的边
                                 currentPositionS.width = value.translation.width/2 + newPositionS.width
-                                currentPositionZ.height = value.translation.width/2*modeRatio + newPositionZ.height
+                                currentPositionZ.height = value.translation.width/2 + newPositionZ.height
                                 
                                 currentPositionCrop.width = value.translation.width/2 + newPositionCrop.width
-                                currentPositionCrop.height = value.translation.width/2*modeRatio + newPositionCrop.height
+                                currentPositionCrop.height = value.translation.width/2 + newPositionCrop.height
                                 cropWidthAdd = value.translation.width
-                                cropHeightAdd = value.translation.width*modeRatio
+                                cropHeightAdd = value.translation.width
                             }
                         }
                     }

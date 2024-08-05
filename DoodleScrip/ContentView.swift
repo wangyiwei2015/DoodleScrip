@@ -25,6 +25,7 @@ struct ContentView: View {
     @State private var selectedColor: Color = .accentColor
     @State private var selectedWidth: CGFloat = 10
     @State var exporting: Bool = false
+    @State var showsAbout = false
     
     @ViewBuilder var drawingToolsBar: some View {
         HStack(spacing: 15) {
@@ -68,7 +69,7 @@ struct ContentView: View {
     
     @ViewBuilder var configMenus: some View {
         Menu {
-            Button("About") {}
+            Button("About") { showsAbout = true }
             Menu("After coping") {
                 Button { actionAfterCopy = 0
                 } label: {
@@ -170,6 +171,10 @@ struct ContentView: View {
                 isPresented: $exporting,
                 image: generatedImage
             )
+        }
+        
+        .sheet(isPresented: $showsAbout) {
+            AboutView()
         }
         
         .onDisappear {

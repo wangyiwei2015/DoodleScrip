@@ -15,6 +15,7 @@
 		B33000E52BF480E900B75B65 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33000E42BF480E900B75B65 /* ExportView.swift */; };
 		B348A91B2C58A65F001162BE /* CropImager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348A91A2C58A65F001162BE /* CropImager.swift */; };
 		B348A91D2C58A7BC001162BE /* CropImager+Dragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348A91C2C58A7BC001162BE /* CropImager+Dragger.swift */; };
+		B3BF587C2C5F412600AD72DF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF587B2C5F412600AD72DF /* AboutView.swift */; };
 		B3F6C45A2C319959008CB576 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B3F6C4592C319959008CB576 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		B33000E62BF495DD00B75B65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B348A91A2C58A65F001162BE /* CropImager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropImager.swift; sourceTree = "<group>"; };
 		B348A91C2C58A7BC001162BE /* CropImager+Dragger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CropImager+Dragger.swift"; sourceTree = "<group>"; };
+		B3BF587B2C5F412600AD72DF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		B3F6C4592C319959008CB576 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +72,7 @@
 				B33000E22BF47C6800B75B65 /* Model.swift */,
 				B348A91A2C58A65F001162BE /* CropImager.swift */,
 				B348A91C2C58A7BC001162BE /* CropImager+Dragger.swift */,
+				B3BF587B2C5F412600AD72DF /* AboutView.swift */,
 				B33000D72BF47B9400B75B65 /* Assets.xcassets */,
 				B33000D92BF47B9400B75B65 /* DoodleScrip.entitlements */,
 				B33000DA2BF47B9400B75B65 /* Preview Content */,
@@ -159,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B33000E52BF480E900B75B65 /* ExportView.swift in Sources */,
+				B3BF587C2C5F412600AD72DF /* AboutView.swift in Sources */,
 				B33000E32BF47C6800B75B65 /* Model.swift in Sources */,
 				B348A91B2C58A65F001162BE /* CropImager.swift in Sources */,
 				B348A91D2C58A7BC001162BE /* CropImager+Dragger.swift in Sources */,
@@ -291,7 +295,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DoodleScrip/DoodleScrip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"DoodleScrip/Preview Content\"";
 				DEVELOPMENT_TEAM = JS2ME2LTBF;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -315,7 +319,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 0.2.1;
+				MARKETING_VERSION = 0.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.scrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -335,7 +339,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DoodleScrip/DoodleScrip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"DoodleScrip/Preview Content\"";
 				DEVELOPMENT_TEAM = JS2ME2LTBF;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -359,7 +363,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 0.2.1;
+				MARKETING_VERSION = 0.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.scrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

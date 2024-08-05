@@ -1,10 +1,10 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "4:3" : {
+    "1:1" : {
 
     },
-    "16:9" : {
+    "about" : {
 
     },
     "About" : {
@@ -16,6 +16,9 @@
           }
         }
       }
+    },
+    "About view contents" : {
+
     },
     "After coping" : {
       "localizations" : {
@@ -47,7 +50,10 @@
         }
       }
     },
-    "Custom" : {
+    "crop 1:1 algorithm" : {
+
+    },
+    "crop ui update" : {
 
     },
     "Do nothing" : {
@@ -150,6 +156,9 @@
       }
     },
     "Subject" : {
+
+    },
+    "TODO" : {
 
     }
   },
