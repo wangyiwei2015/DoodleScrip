@@ -19,6 +19,10 @@ struct ContentView: View {
     @AppStorage("_CFG_ACTION_COPY") var actionAfterCopy: Int = 0
     @AppStorage("_CFG_ACTION_SAVE") var actionAfterSave: Int = 0
     //@AppStorage("_CANVAS") var
+    @AppStorage("_CFG_CANVAS_BG") var canvasBackgroundType: Int = 0
+    @AppStorage("_CFG_CANVAS_BG_COLOR") var canvasBackgroundColorId: Int = 0
+    @AppStorage("_CFG_CANVAS_BG_GRAD") var canvasBackgroundGradId: Int = 0
+    @AppStorage("_CFG_CANVAS_BG_IMG") var canvasBackgroundImage: String = ""
     
     @State var generatedImage: UIImage? = nil
     //var onSetImage: (() -> Void)?
@@ -26,6 +30,7 @@ struct ContentView: View {
     @State private var selectedWidth: CGFloat = 10
     @State var exporting: Bool = false
     @State var showsAbout = false
+    @State var showsPrefs = false
     
     @ViewBuilder var drawingToolsBar: some View {
         HStack(spacing: 15) {
@@ -60,7 +65,23 @@ struct ContentView: View {
                     path, with: .color(line.color), lineWidth: line.lineWidth
                 )
             }
-        }//.aspectRatio(1, contentMode: .fit)
+        }.background(canvasBackground)
+    }
+    
+    @ViewBuilder var canvasBackground: some View {
+        switch canvasBackgroundType {
+        case 0:
+            if canvasBackgroundColorId == 0 {
+                Color(UIColor.systemBackground)
+            } else {
+                bgColors[canvasBackgroundColorId]
+            }
+        case 1:
+            LinearGradient(colors: [.white, .gray], startPoint: .top, endPoint: .bottom)
+        case 2:
+            Color.red
+        default: Color.white
+        }
     }
     
     func checkName(_ checked: Bool) -> String {
@@ -94,6 +115,7 @@ struct ContentView: View {
                     Label("Go home", systemImage: checkName(actionAfterSave == 2))
                 }
             }
+            Button("Settings") { showsPrefs = true }
             Button("Home") { goHome() }
         } label: {
             ZStack {
@@ -164,7 +186,8 @@ struct ContentView: View {
             drawingToolsBar.padding([.horizontal, .bottom])
             
             //Spacer()
-        }.background(Color(UIColor.systemGray6).ignoresSafeArea())
+        }
+        .background(Color(UIColor.systemGray6).ignoresSafeArea())
         
         .overlay {
             ExportView(
@@ -172,14 +195,12 @@ struct ContentView: View {
                 image: generatedImage
             )
         }
+        .sheet(isPresented: $showsAbout) { AboutView() }
+        .fullScreenCover(isPresented: $showsPrefs) { PrefsView() }
         
-        .sheet(isPresented: $showsAbout) {
-            AboutView()
-        }
-        
-        .onDisappear {
+        //.onDisappear {
             //saveCGPointArray(lines.array, to: "_LINES_STORE")
-        }
+        //}
     }
     
     @inlinable func updateGesture(_ value: DragGesture.Value) {

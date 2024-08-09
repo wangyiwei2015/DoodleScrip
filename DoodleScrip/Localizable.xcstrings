@@ -2,7 +2,14 @@
   "sourceLanguage" : "en",
   "strings" : {
     "1:1" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1:1"
+          }
+        }
+      }
     },
     "about" : {
 
@@ -16,9 +23,6 @@
           }
         }
       }
-    },
-    "About view contents" : {
-
     },
     "After coping" : {
       "localizations" : {
@@ -40,6 +44,49 @@
         }
       }
     },
+    "Back" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "返回"
+          }
+        }
+      }
+    },
+    "Background: color / gradient/ texture" : {
+
+    },
+    "Canvas background" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画布背景"
+          }
+        }
+      }
+    },
+    "Canvas paper" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画布背景"
+          }
+        }
+      }
+    },
+    "Color" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "颜色"
+          }
+        }
+      }
+    },
     "Copy" : {
       "localizations" : {
         "zh-Hans" : {
@@ -50,11 +97,15 @@
         }
       }
     },
-    "crop 1:1 algorithm" : {
-
-    },
-    "crop ui update" : {
-
+    "Default color" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "默认颜色"
+          }
+        }
+      }
     },
     "Do nothing" : {
       "localizations" : {
@@ -112,6 +163,16 @@
         }
       }
     },
+    "Gradient" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "渐变"
+          }
+        }
+      }
+    },
     "Home" : {
       "localizations" : {
         "zh-Hans" : {
@@ -131,6 +192,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "保存图像"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全部设置"
           }
         }
       }
@@ -157,6 +228,16 @@
     },
     "Subject" : {
 
+    },
+    "Texture" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "纹理"
+          }
+        }
+      }
     },
     "TODO" : {
 
