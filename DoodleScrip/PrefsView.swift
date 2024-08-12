@@ -62,19 +62,25 @@ struct PrefsView: View {
                     Picker("Canvas background", selection: $canvasBackgroundType) {
                         Text("Color").tag(0)
                         Text("Gradient").tag(1)
-                        Text("Texture").tag(2)
-                    }.pickerStyle(.segmented)
+                    }.pickerStyle(.segmented).animation(.easeInOut, value: canvasBackgroundType)
                     Spacer()
-                }.padding(.top)
+                }.padding(.vertical)
                 
                 switch canvasBackgroundType {
-                case 0: Text("Color")
-                case 1: Text("Gradient")
-                case 2: Text("Texture")
+                case 0: bgColorSel
+                        .transition(.move(edge: .leading))
+                        .animation(.easeInOut, value: canvasBackgroundType)
+                case 1: bgGradientSel
+                        .transition(.move(edge: .trailing))
+                        .animation(.easeInOut, value: canvasBackgroundType)
+                        .padding(.vertical, 5)
                 default: Spacer()
                 }
-                bgColorSel
-                bgGradientSel
+                
+                HStack {
+                    Text("Canvas texture").padding(.vertical)
+                    Spacer()
+                }
                 bgTextureSel
             }.padding(30)
             
@@ -85,9 +91,19 @@ struct PrefsView: View {
     @AppStorage("_CFG_CANVAS_BG") var canvasBackgroundType: Int = 0
     @AppStorage("_CFG_CANVAS_BG_COLOR") var canvasBackgroundColorId: Int = 0
     @AppStorage("_CFG_CANVAS_BG_GRAD") var canvasBackgroundGradId: Int = 0
-    @AppStorage("_CFG_CANVAS_BG_IMG") var canvasBackgroundImage: String = ""
+    @AppStorage("_CFG_CANVAS_BG_IMG") var canvasBackgroundImage: Int = 0
     let colorSelWidth: CGFloat = 60
     let colorSelHeight: CGFloat = 30
+    
+    @ViewBuilder var selsctedCheckmark: some View {
+        Circle().fill(.white)
+            .frame(width: colorSelHeight - 8, height: colorSelHeight - 8)
+            .shadow(color: .primary, radius: 1)
+        Image(systemName: "checkmark.circle.fill")
+            .resizable().scaledToFit()
+            .foregroundColor(.accentColor)
+            .frame(width: colorSelHeight - 10, height: colorSelHeight - 10)
+    }
     
     @ViewBuilder var bgColorSel: some View {
         HStack(spacing: 12) {
@@ -106,17 +122,11 @@ struct PrefsView: View {
                     canvasBackgroundColorId = 0
                 }
                 if canvasBackgroundColorId == 0 {
-                    Circle().fill(.white)
-                        .frame(width: colorSelHeight - 8, height: colorSelHeight - 8)
-                        .shadow(color: .primary, radius: 1)
-                    Image(systemName: "checkmark.circle.fill")
-                        .resizable().scaledToFit()
-                        .foregroundColor(.accentColor)
-                        .frame(width: colorSelHeight - 10, height: colorSelHeight - 10)
+                    selsctedCheckmark
                 }
             }
             
-            ForEach(1..<bgColors.count, id: \.self) { index in
+            ForEach(1...4, id: \.self) { index in
                 ZStack {
                     Capsule()
                         .fill(bgColors[index])
@@ -126,13 +136,23 @@ struct PrefsView: View {
                             canvasBackgroundColorId = index
                         }
                     if canvasBackgroundColorId == index {
-                        Circle().fill(.white)
-                            .frame(width: colorSelHeight - 8, height: colorSelHeight - 8)
-                            .shadow(color: .primary, radius: 1)
-                        Image(systemName: "checkmark.circle.fill")
-                            .resizable().scaledToFit()
-                            .foregroundColor(.accentColor)
-                            .frame(width: colorSelHeight - 10, height: colorSelHeight - 10)
+                        selsctedCheckmark
+                    }
+                }
+            }
+        }
+        HStack(spacing: 12) {
+            ForEach(5...9, id: \.self) { index in
+                ZStack {
+                    Capsule()
+                        .fill(bgColors[index])
+                        .frame(width: colorSelWidth, height: colorSelHeight)
+                        .shadow(color: .primary, radius: 1)
+                        .onTapGesture {
+                            canvasBackgroundColorId = index
+                        }
+                    if canvasBackgroundColorId == index {
+                        selsctedCheckmark
                     }
                 }
             }
@@ -140,19 +160,72 @@ struct PrefsView: View {
     }
     
     @ViewBuilder var bgGradientSel: some View {
-        Text("not done")
+        HStack(spacing: 12) {
+            ForEach(0..<bgGrads.count, id: \.self) { index in
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(bgGrads[index])
+                        .frame(width: colorSelWidth, height: colorSelWidth)
+                        .shadow(color: .primary, radius: 1)
+                        .onTapGesture {
+                            canvasBackgroundGradId = index
+                        }
+                    if canvasBackgroundGradId == index {
+                        selsctedCheckmark
+                    }
+                }
+            } // foreach
+        }
     }
     
     @ViewBuilder var bgTextureSel: some View {
-        Text("not done")
+        HStack(spacing: 12) {
+            ForEach(0...4, id: \.self) { index in
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12).fill(Color(UIColor.systemBackground))
+                        .frame(width: colorSelWidth, height: colorSelWidth)
+                        .shadow(color: .primary, radius: 1)
+                    Image(bgImgPreviewNames[index]).resizable().scaledToFill()
+                        .frame(width: colorSelWidth, height: colorSelWidth)
+                        .onTapGesture {
+                            canvasBackgroundImage = index
+                        }
+                    if canvasBackgroundImage == index {
+                        selsctedCheckmark
+                    }
+                }
+            }
+        }
     }
 }
 
-let bgColors: [Color] = [.clear, .white, .black, .gray, Color(red: 1.0, green: 0.97, blue: 0.75)]
-let bgGrads: [Gradient] = [
+extension Color {
+    static func hex(_ hex: UInt32) -> Color {
+        let gCompAlign = hex >> 8
+        let rCompAlign = hex >> 16
+        let r = Double(rCompAlign & 0xFF) / 255
+        let g = Double(gCompAlign & 0xFF) / 255
+        let b = Double(hex & 0xFF) / 255
+        return Color(red: r, green: g, blue: b)
+    }
+}
+
+let bgColors: [Color] = [
+    .clear, .white, .black, .gray, Color(red: 1.0, green: 0.97, blue: 0.78),
+    .hex(0xFFDAE8), .hex(0xCDEAFF), .hex(0xB4FFC8), .hex(0xFFE6A0), .hex(0xE6CDFF),
+]
+let bgGrads: [LinearGradient] = [
+    LinearGradient(colors: [.white, .black], startPoint: .top, endPoint: .bottom),
+    LinearGradient(colors: [.blue, .purple], startPoint: .top, endPoint: .bottom),
+    LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom),
+    LinearGradient(colors: [.green, .blue], startPoint: .top, endPoint: .bottom),
+    LinearGradient(colors: [.blue, .purple], startPoint: .top, endPoint: .bottom),
 ]
 let bgImgNames: [String] = [
-    "",
+    "", "dot", "line", "grid", ""
+]
+let bgImgPreviewNames: [String] = [
+    "", "dot_preview", "line_preview", "grid_preview", "_preview"
 ]
 
 #Preview {

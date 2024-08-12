@@ -54,9 +54,6 @@
         }
       }
     },
-    "Background: color / gradient/ texture" : {
-
-    },
     "Canvas background" : {
       "localizations" : {
         "zh-Hans" : {
@@ -73,6 +70,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "画布背景"
+          }
+        }
+      }
+    },
+    "Canvas texture" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画布纹理"
           }
         }
       }
@@ -230,6 +237,7 @@
 
     },
     "Texture" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {

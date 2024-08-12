@@ -22,7 +22,7 @@ struct ContentView: View {
     @AppStorage("_CFG_CANVAS_BG") var canvasBackgroundType: Int = 0
     @AppStorage("_CFG_CANVAS_BG_COLOR") var canvasBackgroundColorId: Int = 0
     @AppStorage("_CFG_CANVAS_BG_GRAD") var canvasBackgroundGradId: Int = 0
-    @AppStorage("_CFG_CANVAS_BG_IMG") var canvasBackgroundImage: String = ""
+    @AppStorage("_CFG_CANVAS_BG_IMG") var canvasBackgroundImage: Int = 0
     
     @State var generatedImage: UIImage? = nil
     //var onSetImage: (() -> Void)?
@@ -77,11 +77,10 @@ struct ContentView: View {
                 bgColors[canvasBackgroundColorId]
             }
         case 1:
-            LinearGradient(colors: [.white, .gray], startPoint: .top, endPoint: .bottom)
-        case 2:
-            Color.red
+            bgGrads[canvasBackgroundGradId]
         default: Color.white
         }
+        Image(bgImgNames[canvasBackgroundImage]).resizable(resizingMode: .tile)
     }
     
     func checkName(_ checked: Bool) -> String {
