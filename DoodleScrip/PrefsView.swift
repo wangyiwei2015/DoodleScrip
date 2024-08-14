@@ -228,7 +228,7 @@ extension Color {
         let r = Double(rCompAlign & 0xFF) / 255
         let g = Double(gCompAlign & 0xFF) / 255
         let b = Double(hex & 0xFF) / 255
-        return Color(red: r, green: g, blue: b, opacity: a)
+        return Color(red: r, green: g, blue: b, opacity: a == 0 ? 1 : a)
     }
 }
 
