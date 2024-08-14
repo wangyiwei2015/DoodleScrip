@@ -9,9 +9,15 @@ import SwiftUI
 
 struct PrefsView: View {
     @Environment(\.dismiss) var dismiss
+    //@Environment(\.self) var env
     
     @AppStorage("_CFG_ACTION_COPY") var actionAfterCopy: Int = 0
     @AppStorage("_CFG_ACTION_SAVE") var actionAfterSave: Int = 0
+    @AppStorage("_CFG_DEF_COLOR") var defColor: Int = 0xFF333333
+    
+    @State var defaultColor: Color = .hex(
+        UInt32(UserDefaults.standard.integer(forKey: "_CFG_DEF_COLOR"))
+    )
     
     var body: some View {
         VStack {
@@ -52,8 +58,22 @@ struct PrefsView: View {
                 }
                 
                 HStack {
-                    ColorPicker("Default color", selection: .constant(.accentColor))
+                    ColorPicker("Default color", selection: $defaultColor)
                         .frame(width: 160)
+                        .onChange(of: defaultColor) { newValue in
+                            //let res = newValue.resolve(in: env)
+                            var a: CGFloat = 0.0
+                            var r: CGFloat = 0.0
+                            var g: CGFloat = 0.0
+                            var b: CGFloat = 0.0
+                            UIColor(newValue).getRed(&r, green: &g, blue: &b, alpha: &a)
+                            var storedColor: Int = 0
+                            storedColor += Int(255 * a) << 24
+                            storedColor += Int(255 * r) << 16
+                            storedColor += Int(255 * g) << 8
+                            storedColor += Int(255 * b) << 0
+                            defColor = storedColor
+                        }
                     Spacer()
                 }
                 
@@ -200,13 +220,15 @@ struct PrefsView: View {
 }
 
 extension Color {
-    static func hex(_ hex: UInt32) -> Color {
+    static func hex(_ hex: UInt32) -> Color { // ARGB format
         let gCompAlign = hex >> 8
         let rCompAlign = hex >> 16
+        let aCompAlign = hex >> 24
+        let a = Double(aCompAlign & 0xFF) / 255
         let r = Double(rCompAlign & 0xFF) / 255
         let g = Double(gCompAlign & 0xFF) / 255
         let b = Double(hex & 0xFF) / 255
-        return Color(red: r, green: g, blue: b)
+        return Color(red: r, green: g, blue: b, opacity: a)
     }
 }
 

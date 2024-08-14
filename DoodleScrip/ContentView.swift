@@ -26,8 +26,10 @@ struct ContentView: View {
     
     @State var generatedImage: UIImage? = nil
     //var onSetImage: (() -> Void)?
-    @State private var selectedColor: Color = .accentColor
-    @State private var selectedWidth: CGFloat = 10
+    @State private var selectedColor: Color = .hex(
+        UInt32(UserDefaults.standard.integer(forKey: "_CFG_DEF_COLOR"))
+    )
+    @State private var selectedWidth: CGFloat = 5
     @State var exporting: Bool = false
     @State var showsAbout = false
     @State var showsPrefs = false
@@ -40,17 +42,17 @@ struct ContentView: View {
             label: { Image(systemName: "scribble").foregroundColor(.primary) }
                 .buttonStyle(StrokeWidthBtnStyle(weight: .light))
                 .frame(width: 60, height: 30)
-                .background(Capsule().fill(Color(selectedWidth == 10 ? UIColor.systemGray3 : UIColor.systemGray5)))
+                .background(Capsule().fill(Color(selectedWidth == 5 ? UIColor.systemGray3 : UIColor.systemGray5)))
             Button { selectedWidth = 15 }
             label: { Image(systemName: "scribble").foregroundColor(.primary) }
                 .buttonStyle(StrokeWidthBtnStyle(weight: .semibold))
                 .frame(width: 60, height: 30)
-                .background(Capsule().fill(Color(selectedWidth == 20 ? UIColor.systemGray3 : UIColor.systemGray5)))
+                .background(Capsule().fill(Color(selectedWidth == 15 ? UIColor.systemGray3 : UIColor.systemGray5)))
             Button { selectedWidth = 25 }
             label: { Image(systemName: "scribble").foregroundColor(.primary) }
                 .buttonStyle(StrokeWidthBtnStyle(weight: .black))
                 .frame(width: 60, height: 30)
-                .background(Capsule().fill(Color(selectedWidth == 30 ? UIColor.systemGray3 : UIColor.systemGray5)))
+                .background(Capsule().fill(Color(selectedWidth == 25 ? UIColor.systemGray3 : UIColor.systemGray5)))
             Spacer()
         }
     }
