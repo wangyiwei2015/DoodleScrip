@@ -17,6 +17,7 @@
 		B348A91D2C58A7BC001162BE /* CropImager+Dragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348A91C2C58A7BC001162BE /* CropImager+Dragger.swift */; };
 		B3BF587C2C5F412600AD72DF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF587B2C5F412600AD72DF /* AboutView.swift */; };
 		B3BF58992C65D28D00AD72DF /* PrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF58982C65D28D00AD72DF /* PrefsView.swift */; };
+		B3F2D10B2C6D1CAB00B60AC1 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B3F2D10A2C6D1CAB00B60AC1 /* InfoPlist.xcstrings */; };
 		B3F6C45A2C319959008CB576 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B3F6C4592C319959008CB576 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		B348A91C2C58A7BC001162BE /* CropImager+Dragger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CropImager+Dragger.swift"; sourceTree = "<group>"; };
 		B3BF587B2C5F412600AD72DF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		B3BF58982C65D28D00AD72DF /* PrefsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsView.swift; sourceTree = "<group>"; };
+		B3F2D10A2C6D1CAB00B60AC1 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		B3F6C4592C319959008CB576 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +82,7 @@
 				B33000D92BF47B9400B75B65 /* DoodleScrip.entitlements */,
 				B33000DA2BF47B9400B75B65 /* Preview Content */,
 				B3F6C4592C319959008CB576 /* Localizable.xcstrings */,
+				B3F2D10A2C6D1CAB00B60AC1 /* InfoPlist.xcstrings */,
 			);
 			path = DoodleScrip;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			files = (
 				B33000DC2BF47B9400B75B65 /* Preview Assets.xcassets in Resources */,
 				B33000D82BF47B9400B75B65 /* Assets.xcassets in Resources */,
+				B3F2D10B2C6D1CAB00B60AC1 /* InfoPlist.xcstrings in Resources */,
 				B3F6C45A2C319959008CB576 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,14 +303,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DoodleScrip/DoodleScrip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"DoodleScrip/Preview Content\"";
 				DEVELOPMENT_TEAM = JS2ME2LTBF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoodleScrip/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = DoodleScrip;
+				INFOPLIST_KEY_CFBundleDisplayName = scrip;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To save your doodles";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -323,7 +327,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 0.2.8;
+				MARKETING_VERSION = 1.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.scrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -343,14 +347,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DoodleScrip/DoodleScrip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"DoodleScrip/Preview Content\"";
 				DEVELOPMENT_TEAM = JS2ME2LTBF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoodleScrip/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = DoodleScrip;
+				INFOPLIST_KEY_CFBundleDisplayName = scrip;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To save your doodles";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -367,7 +371,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 0.2.8;
+				MARKETING_VERSION = 1.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.scrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
