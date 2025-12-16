@@ -21,21 +21,21 @@ struct PrefsView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Button {
-                    dismiss()
-                } label: {
-                    Label("Back", systemImage: "checkmark") //chevron.left
-                }.buttonStyle(StrokeWidthBtnStyle(weight: .semibold))
-                    .frame(width: 100, height: 32)
-                    .background(Capsule().fill(Color.gray))
-                    .foregroundColor(.white)
-                Divider().padding(.horizontal, 10)
-                Text("Settings").font(.title2).bold()
-                Spacer()
-            }
-            .frame(height: 32)
-            .padding(.horizontal)
+//            HStack {
+//                Button {
+//                    dismiss()
+//                } label: {
+//                    Label("Back", systemImage: "checkmark") //chevron.left
+//                }.buttonStyle(StrokeWidthBtnStyle(weight: .semibold))
+//                    .frame(width: 100, height: 32)
+//                    .background(Capsule().fill(Color.gray))
+//                    .foregroundColor(.white)
+//                Divider().padding(.horizontal, 10)
+//                Text("Settings").font(.title2).bold()
+//                Spacer()
+//            }
+//            .frame(height: 32)
+//            .padding(.horizontal)
             
             VStack(spacing: 10) {
                 HStack {
@@ -106,6 +106,9 @@ struct PrefsView: View {
             
             Spacer()
         }
+        .tint(.accentColor)
+        .navigationTitle("Settings")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     @AppStorage("_CFG_CANVAS_BG") var canvasBackgroundType: Int = 0

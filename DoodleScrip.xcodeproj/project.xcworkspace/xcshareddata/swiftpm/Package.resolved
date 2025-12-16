@@ -1,0 +1,15 @@
+{
+  "originHash" : "991d78d2adc2a54d3820a9c235c0d9d7e51e0fd4e9a8bc626fa21638fb0735a5",
+  "pins" : [
+    {
+      "identity" : "glassybutton",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wangyiwei2015/GlassyButton",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5be57307597f66b9ef00f25de9ced841496a46e5"
+      }
+    }
+  ],
+  "version" : 3
+}

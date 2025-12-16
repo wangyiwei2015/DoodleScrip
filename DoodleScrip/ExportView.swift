@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GlassyButton
 
 struct ExportView: View {
     @Namespace var namespace
@@ -38,7 +39,8 @@ struct ExportView: View {
                     
                     ShareLink(item: tmpURL, subject: Text("Subject"), message: Text("message")) {
                         Label("Share", systemImage: "square.and.arrow.up").bold()
-                    }.buttonStyle(BorderedProminentButtonStyle())
+                            .padding(.horizontal).frame(height: 40)
+                    }.glassyButton(.accentColor)
                     
                     Button {
                         UIPasteboard.general.image = croppedImg ?? image
@@ -51,7 +53,8 @@ struct ExportView: View {
                         }
                     } label: {
                         Label("Copy", systemImage: "doc.on.doc").bold()
-                    }.buttonStyle(BorderedProminentButtonStyle())
+                            .padding(.horizontal).frame(height: 40)
+                    }.glassyButton(.accentColor)
                     
                     Button {
                         UIImageWriteToSavedPhotosAlbum(croppedImg ?? image!, nil, nil, nil)
@@ -66,14 +69,18 @@ struct ExportView: View {
                         }
                     } label: {
                         Label("Save", systemImage: "tray.and.arrow.down").bold()
-                    }.buttonStyle(BorderedProminentButtonStyle())
+                            .padding(.horizontal).frame(height: 40)
+                    }.glassyButton(.accentColor)
                     
                     Button {
                         dismiss()
-                    } label: { Image(systemName: "xmark").bold().foregroundColor(.white) }
-                        .frame(width: 50, height: 50)
-                        .background(Capsule().fill(Color.gray))
-                }.tint(.gray).transition(.move(edge: .bottom))
+                    } label: {
+                        Image(systemName: "xmark").bold().foregroundColor(.white)
+                            .frame(width: 40, height: 30)
+                    }.glassyButton()
+                }
+                //.tint(.gray)
+                .transition(.move(edge: .bottom))
             }
             VStack {
                 Image(uiImage: croppedImg ?? image ?? UIImage()).resizable().scaledToFit()

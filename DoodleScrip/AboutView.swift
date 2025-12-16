@@ -11,11 +11,9 @@ struct AboutView: View {
     var body: some View {
         VStack {
             Text("about")
-            Text("TODO")
+            Text("The fastest way to sketch and share")
         }
     }
 }
 
-#Preview {
-    AboutView()
-}
+#Preview { AboutView() }

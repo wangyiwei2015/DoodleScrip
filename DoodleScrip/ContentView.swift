@@ -7,6 +7,7 @@
 // Source: https://github.com/MrPaschenko/Paint
 
 import SwiftUI
+import GlassyButton
 
 var _canvasSize: CGSize = .zero
 let tmp = "\(NSHomeDirectory())/tmp/doodle.jpg"
@@ -37,22 +38,31 @@ struct ContentView: View {
     @ViewBuilder var drawingToolsBar: some View {
         HStack(spacing: 15) {
             Spacer()
-            ColorPicker("Stroke", selection: $selectedColor).labelsHidden().padding(.trailing)
+            Circle().fill(.gray.opacity(0.2)).frame(width: 40, height: 40)
+                .overlay {
+                    ColorPicker("Stroke", selection: $selectedColor).labelsHidden()
+                }.padding(.trailing)
             Button { selectedWidth = 5 }
-            label: { Image(systemName: "scribble").foregroundColor(.primary) }
-                .buttonStyle(StrokeWidthBtnStyle(weight: .light))
-                .frame(width: 60, height: 30)
-                .background(Capsule().fill(Color(selectedWidth == 5 ? UIColor.systemGray3 : UIColor.systemGray5)))
+            label: {
+                Image(systemName: "scribble").frame(width: 48, height: 28)
+            }.glassyButton(.gray.opacity(selectedWidth == 5 ? 1 : 0.3))
+                //.buttonStyle(StrokeWidthBtnStyle(weight: .light))
+                //.frame(width: 60, height: 30)
+                //.background(Capsule().fill())
             Button { selectedWidth = 15 }
-            label: { Image(systemName: "scribble").foregroundColor(.primary) }
-                .buttonStyle(StrokeWidthBtnStyle(weight: .semibold))
-                .frame(width: 60, height: 30)
-                .background(Capsule().fill(Color(selectedWidth == 15 ? UIColor.systemGray3 : UIColor.systemGray5)))
+            label: {
+                Image(systemName: "scribble").frame(width: 48, height: 28)
+            }.glassyButton(.gray.opacity(selectedWidth == 15 ? 1 : 0.3))
+                //.buttonStyle(StrokeWidthBtnStyle(weight: .semibold))
+                //.frame(width: 60, height: 30)
+                //.background(Capsule().fill(Color(selectedWidth == 15 ? UIColor.systemGray3 : UIColor.systemGray5)))
             Button { selectedWidth = 25 }
-            label: { Image(systemName: "scribble").foregroundColor(.primary) }
-                .buttonStyle(StrokeWidthBtnStyle(weight: .black))
-                .frame(width: 60, height: 30)
-                .background(Capsule().fill(Color(selectedWidth == 25 ? UIColor.systemGray3 : UIColor.systemGray5)))
+            label: {
+                Image(systemName: "scribble").frame(width: 48, height: 28)
+            }.glassyButton(.gray.opacity(selectedWidth == 25 ? 1 : 0.3))
+                //.buttonStyle(StrokeWidthBtnStyle(weight: .black))
+                //.frame(width: 60, height: 30)
+                //.background(Capsule().fill(Color(selectedWidth == 25 ? UIColor.systemGray3 : UIColor.systemGray5)))
             Spacer()
         }
     }
@@ -119,77 +129,74 @@ struct ContentView: View {
             Button("Settings") { showsPrefs = true }
             Button("Home") { goHome() }
         } label: {
-            ZStack {
-                Capsule().fill(Color.gray)
-                    .frame(width: 80, height: 32)
-                Image(systemName: "gear")
-                    .foregroundColor(.white)
-            }
-        }.buttonStyle(StrokeWidthBtnStyle(weight: .semibold))
+            Image(systemName: "gear")
+                .padding(.horizontal).frame(height: 30)
+        }.glassyButton(.gray.opacity(0.8))
+        //.buttonStyle(StrokeWidthBtnStyle(weight: .semibold))
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                Button { _ = lines.array.popLast() }
-                label: { Image(systemName: "arrow.uturn.left").bold().foregroundColor(.white) }
-                    .frame(width: 32, height: 32)
-                    .background(Capsule().fill(Color.gray).opacity(lines.array.isEmpty ? 0.5 : 1))
-                    .disabled(lines.array.isEmpty)
-                Button { lines.array = [] }
-                label: { Image(systemName: "xmark").bold().foregroundColor(.white) }
-                    .frame(width: 32, height: 32)
-                    .background(Capsule().fill(lines.array.isEmpty ? Color.gray : Color.red))
-                    .disabled(lines.array.isEmpty)
-                    .padding(.horizontal, 10)
-                Spacer()
-                //Text("Scrip").font(.title2)
-                configMenus
-                Spacer()
-                Button {
-                    let renderer = ImageRenderer(
-                        content: drawingCanvas.frame(
-                            width: _canvasSize.width, height: _canvasSize.height
-                        ).background(Color.white)
-                    )
-                    generatedImage = renderer.uiImage!
-                    try? FileManager.default.removeItem(at: tmpURL)
-                    try! generatedImage?.jpegData(compressionQuality: 1.0)!.write(to: tmpURL, options: .atomic)
-                    withAnimation {
-                        exporting = true
-                    }
-                } label: {
-                    Label("Export", systemImage: "checkmark")
-                }.buttonStyle(StrokeWidthBtnStyle(weight: .semibold))
-                    .frame(width: 120, height: 32)
-                    .background(Capsule().fill(Color.accentColor).opacity(lines.array.isEmpty ? 0.5 : 1))
-                    .foregroundColor(.white)
-                    .disabled(lines.array.isEmpty)
-            }.padding(.horizontal)
-            //Spacer()
-            ZStack {
-                drawingCanvas
-                    .gesture(
-                        DragGesture(
-                            minimumDistance: 0, coordinateSpace: .local
-                        ).onChanged(updateGesture(_:))
-                    )
-//                if !exporting {
-//                    if let img = generatedImage {
-//                        Image(uiImage: img).resizable()
-//                            .matchedGeometryEffect(id: "doodle", in: namespace, properties: .frame)
-//                    }
-//                }
+        NavigationStack {
+            VStack {
+                HStack {
+                    Button { _ = lines.array.popLast() }
+                    label: {
+                        Image(systemName: "arrow.uturn.left").bold()
+                            .frame(width: 30, height: 30)
+                    }.glassyButton(.gray).disabled(lines.array.isEmpty)
+                    Button { lines.array = [] }
+                    label: {
+                        Image(systemName: "xmark").bold()
+                            .frame(width: 30, height: 30)
+                    }.glassyButton(.red).disabled(lines.array.isEmpty)
+                        .padding(.horizontal, 10)
+                    
+                    Spacer()
+                    configMenus
+                    Spacer()
+                    
+                    Button {
+                        let renderer = ImageRenderer(
+                            content: drawingCanvas.frame(
+                                width: _canvasSize.width, height: _canvasSize.height
+                            ).background(Color.white)
+                        )
+                        generatedImage = renderer.uiImage!
+                        try? FileManager.default.removeItem(at: tmpURL)
+                        try! generatedImage?.jpegData(compressionQuality: 1.0)!.write(to: tmpURL, options: .atomic)
+                        withAnimation {
+                            exporting = true
+                        }
+                    } label: {
+                        Label("Export", systemImage: "checkmark")
+                            .padding(.horizontal).frame(height: 30)
+                    }.glassyButton(.accentColor).disabled(lines.array.isEmpty)
+                }.padding(.horizontal)
+                //Spacer()
+                ZStack {
+                    drawingCanvas
+                        .gesture(
+                            DragGesture(
+                                minimumDistance: 0, coordinateSpace: .local
+                            ).onChanged(updateGesture(_:))
+                        )
+                    //                if !exporting {
+                    //                    if let img = generatedImage {
+                    //                        Image(uiImage: img).resizable()
+                    //                            .matchedGeometryEffect(id: "doodle", in: namespace, properties: .frame)
+                    //                    }
+                    //                }
+                }
+                .background(Color.white).padding(2)
+                .background(Color(UIColor.systemGray5))
+                .padding(.horizontal)
+                drawingToolsBar.padding([.horizontal, .bottom])
+                
+                //Spacer()
             }
-            .background(Color.white).padding(2)
-            .background(Color(UIColor.systemGray5))
-            .padding(.horizontal)
-            drawingToolsBar.padding([.horizontal, .bottom])
-            
-            //Spacer()
+            .background(Color(UIColor.systemGray6).ignoresSafeArea())
+            .navigationDestination(isPresented: $showsPrefs) { PrefsView() }
         }
-        .background(Color(UIColor.systemGray6).ignoresSafeArea())
-        
         .overlay {
             ExportView(
                 isPresented: $exporting,
@@ -197,7 +204,6 @@ struct ContentView: View {
             )
         }
         .sheet(isPresented: $showsAbout) { AboutView() }
-        .fullScreenCover(isPresented: $showsPrefs) { PrefsView() }
         
         //.onDisappear {
             //saveCGPointArray(lines.array, to: "_LINES_STORE")

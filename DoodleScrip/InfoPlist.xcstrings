@@ -29,7 +29,8 @@
             "value" : "DoodleScrip"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "NSPhotoLibraryAddUsageDescription" : {
       "comment" : "Privacy - Photo Library Additions Usage Description",
@@ -39,6 +40,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "To save your doodles"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存草稿到相册"
           }
         }
       }
