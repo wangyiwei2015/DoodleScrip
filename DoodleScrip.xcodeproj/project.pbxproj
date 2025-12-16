@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,8 @@
 		B33000E32BF47C6800B75B65 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33000E22BF47C6800B75B65 /* Model.swift */; };
 		B33000E52BF480E900B75B65 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33000E42BF480E900B75B65 /* ExportView.swift */; };
 		B347709E2EF1955700FE8296 /* GlassyButton in Frameworks */ = {isa = PBXBuildFile; productRef = B347709D2EF1955700FE8296 /* GlassyButton */; };
+		B34771B52EF1A7A700FE8296 /* ScripClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = B34771A92EF1A7A700FE8296 /* ScripClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B34771BF2EF1AC3D00FE8296 /* GlassyButton in Frameworks */ = {isa = PBXBuildFile; productRef = B34771BE2EF1AC3D00FE8296 /* GlassyButton */; };
 		B348A91B2C58A65F001162BE /* CropImager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348A91A2C58A65F001162BE /* CropImager.swift */; };
 		B348A91D2C58A7BC001162BE /* CropImager+Dragger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348A91C2C58A7BC001162BE /* CropImager+Dragger.swift */; };
 		B3BF587C2C5F412600AD72DF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF587B2C5F412600AD72DF /* AboutView.swift */; };
@@ -21,6 +23,30 @@
 		B3F2D10B2C6D1CAB00B60AC1 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B3F2D10A2C6D1CAB00B60AC1 /* InfoPlist.xcstrings */; };
 		B3F6C45A2C319959008CB576 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B3F6C4592C319959008CB576 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B34771B32EF1A7A700FE8296 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B33000C82BF47B9300B75B65 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B34771A82EF1A7A700FE8296;
+			remoteInfo = ScripClip;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B34771B62EF1A7A700FE8296 /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+				B34771B52EF1A7A700FE8296 /* ScripClip.app in Embed App Clips */,
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B33000D02BF47B9300B75B65 /* DoodleScrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoodleScrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,6 +58,7 @@
 		B33000E22BF47C6800B75B65 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B33000E42BF480E900B75B65 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		B33000E62BF495DD00B75B65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B34771A92EF1A7A700FE8296 /* ScripClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScripClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B348A91A2C58A65F001162BE /* CropImager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropImager.swift; sourceTree = "<group>"; };
 		B348A91C2C58A7BC001162BE /* CropImager+Dragger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CropImager+Dragger.swift"; sourceTree = "<group>"; };
 		B3BF587B2C5F412600AD72DF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -39,6 +66,20 @@
 		B3F2D10A2C6D1CAB00B60AC1 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		B3F6C4592C319959008CB576 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B34771B92EF1A7A700FE8296 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B34771A82EF1A7A700FE8296 /* ScripClip */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		B34771AA2EF1A7A700FE8296 /* ScripClip */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (B34771B92EF1A7A700FE8296 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ScripClip; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B33000CD2BF47B9300B75B65 /* Frameworks */ = {
@@ -49,6 +90,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B34771A62EF1A7A700FE8296 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B34771BF2EF1AC3D00FE8296 /* GlassyButton in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -56,6 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				B33000D22BF47B9300B75B65 /* DoodleScrip */,
+				B34771AA2EF1A7A700FE8296 /* ScripClip */,
+				B34771BD2EF1AC3D00FE8296 /* Frameworks */,
 				B33000D12BF47B9300B75B65 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				B33000D02BF47B9300B75B65 /* DoodleScrip.app */,
+				B34771A92EF1A7A700FE8296 /* ScripClip.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,6 +149,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		B34771BD2EF1AC3D00FE8296 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,15 +166,40 @@
 				B33000CC2BF47B9300B75B65 /* Sources */,
 				B33000CD2BF47B9300B75B65 /* Frameworks */,
 				B33000CE2BF47B9300B75B65 /* Resources */,
+				B34771B62EF1A7A700FE8296 /* Embed App Clips */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B34771B42EF1A7A700FE8296 /* PBXTargetDependency */,
 			);
 			name = DoodleScrip;
 			productName = DoodleScrip;
 			productReference = B33000D02BF47B9300B75B65 /* DoodleScrip.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B34771A82EF1A7A700FE8296 /* ScripClip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B34771BA2EF1A7A700FE8296 /* Build configuration list for PBXNativeTarget "ScripClip" */;
+			buildPhases = (
+				B34771A52EF1A7A700FE8296 /* Sources */,
+				B34771A62EF1A7A700FE8296 /* Frameworks */,
+				B34771A72EF1A7A700FE8296 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B34771AA2EF1A7A700FE8296 /* ScripClip */,
+			);
+			name = ScripClip;
+			packageProductDependencies = (
+				B34771BE2EF1AC3D00FE8296 /* GlassyButton */,
+			);
+			productName = ScripClip;
+			productReference = B34771A92EF1A7A700FE8296 /* ScripClip.app */;
+			productType = "com.apple.product-type.application.on-demand-install-capable";
 		};
 /* End PBXNativeTarget section */
 
@@ -124,11 +208,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					B33000CF2BF47B9300B75B65 = {
 						CreatedOnToolsVersion = 15.3;
+					};
+					B34771A82EF1A7A700FE8296 = {
+						CreatedOnToolsVersion = 26.2;
 					};
 				};
 			};
@@ -150,6 +237,7 @@
 			projectRoot = "";
 			targets = (
 				B33000CF2BF47B9300B75B65 /* DoodleScrip */,
+				B34771A82EF1A7A700FE8296 /* ScripClip */,
 			);
 		};
 /* End PBXProject section */
@@ -163,6 +251,13 @@
 				B33000D82BF47B9400B75B65 /* Assets.xcassets in Resources */,
 				B3F2D10B2C6D1CAB00B60AC1 /* InfoPlist.xcstrings in Resources */,
 				B3F6C45A2C319959008CB576 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B34771A72EF1A7A700FE8296 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +279,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B34771A52EF1A7A700FE8296 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B34771B42EF1A7A700FE8296 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B34771A82EF1A7A700FE8296 /* ScripClip */;
+			targetProxy = B34771B32EF1A7A700FE8296 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B33000DD2BF47B9400B75B65 /* Debug */ = {
@@ -315,7 +425,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoodleScrip/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = scrip;
+				INFOPLIST_KEY_CFBundleDisplayName = Scrip;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To save your doodles";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -359,7 +469,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoodleScrip/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = scrip;
+				INFOPLIST_KEY_CFBundleDisplayName = Scrip;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To save your doodles";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -389,6 +499,91 @@
 			};
 			name = Release;
 		};
+		B34771B72EF1A7A700FE8296 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ScripClip/ScripClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 15;
+				DEVELOPMENT_TEAM = JS2ME2LTBF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScripClip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ScripClip;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.scrip.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		B34771B82EF1A7A700FE8296 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ScripClip/ScripClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 15;
+				DEVELOPMENT_TEAM = JS2ME2LTBF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScripClip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ScripClip;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wyw.scrip.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -410,6 +605,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		B34771BA2EF1A7A700FE8296 /* Build configuration list for PBXNativeTarget "ScripClip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B34771B72EF1A7A700FE8296 /* Debug */,
+				B34771B82EF1A7A700FE8296 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -425,6 +629,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		B347709D2EF1955700FE8296 /* GlassyButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B347709C2EF1955700FE8296 /* XCRemoteSwiftPackageReference "GlassyButton" */;
+			productName = GlassyButton;
+		};
+		B34771BE2EF1AC3D00FE8296 /* GlassyButton */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B347709C2EF1955700FE8296 /* XCRemoteSwiftPackageReference "GlassyButton" */;
 			productName = GlassyButton;
