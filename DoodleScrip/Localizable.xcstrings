@@ -53,6 +53,7 @@
       }
     },
     "Back" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -255,8 +256,8 @@
         }
       }
     },
-    "TODO" : {
-      "shouldTranslate" : false
+    "The fastest way to sketch and share" : {
+
     }
   },
   "version" : "1.0"
