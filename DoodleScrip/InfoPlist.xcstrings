@@ -13,8 +13,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "小纸片"
+            "state" : "translated",
+            "value" : "Scrip"
           }
         }
       }
